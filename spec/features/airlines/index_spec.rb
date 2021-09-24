@@ -31,5 +31,18 @@ RSpec.describe 'Airline index' do
         expect(page).to have_content(pass2.name)
       end
     end
+
+    it 'can remove a passenger' do
+      within "#flight-#{flight1.id}" do
+        expect(page).to have_content(pass1.name)
+
+        click_on "Remove #{pass1.name}"
+
+        expect(page).not_to have_content(pass1.name)
+      end
+
+      expect(current_path).to eq(flights_path)
+      expect(flight1.passengers.count).to eq(1)
+    end
   end
 end

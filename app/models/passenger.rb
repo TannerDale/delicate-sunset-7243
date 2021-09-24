@@ -6,4 +6,11 @@ class Passenger < ApplicationRecord
   scope :adults, -> {
     where('passengers.age >= ?', 18)
   }
+
+  scope :ordered_by_flight_count, -> {
+    joins(:flights)
+      .select('passengers.*, COUNT(flights.id) AS flight_count')
+      .order(flight_count: :desc)
+      .group(:id)
+  }
 end

@@ -4,6 +4,9 @@ class Airline < ApplicationRecord
   has_many :passengers, through: :flights
 
   def adult_passengers
-    passengers.adults.distinct
+    passengers
+      .adults
+      .merge(Passenger.ordered_by_flight_count)
+      .distinct
   end
 end

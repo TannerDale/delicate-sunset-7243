@@ -33,6 +33,8 @@ RSpec.describe 'Airline index' do
     end
 
     it 'can remove a passenger' do
+      expect(Passenger.count).to eq(3)
+
       within "#flight-#{flight1.id}" do
         expect(page).to have_content(pass1.name)
 
@@ -43,6 +45,7 @@ RSpec.describe 'Airline index' do
 
       expect(current_path).to eq(flights_path)
       expect(flight1.passengers.count).to eq(1)
+      expect(Passenger.count).to eq(3)
     end
   end
 end

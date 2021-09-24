@@ -9,9 +9,9 @@ RSpec.describe 'Airline index' do
     let!(:pass1) { create :passenger }
     let!(:pass2) { create :passenger }
     let!(:pass3) { create :passenger }
-    let!(:tick1) { Ticket.create(passenger_id: pass1.id, flight_id: flight1.id)}
-    let!(:tick2) { Ticket.create(passenger_id: pass2.id, flight_id: flight2.id)}
-    let!(:tick3) { Ticket.create(passenger_id: pass3.id, flight_id: flight1.id)}
+    let!(:tick1) { Ticket.create(passenger_id: pass1.id, flight_id: flight1.id) }
+    let!(:tick2) { Ticket.create(passenger_id: pass2.id, flight_id: flight2.id) }
+    let!(:tick3) { Ticket.create(passenger_id: pass3.id, flight_id: flight1.id) }
 
     before :each do
       visit flights_path

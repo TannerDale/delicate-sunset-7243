@@ -1,13 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Passenger, type: :model do
-  describe 'relationships' do
-    it { should have_many :tickets }
-    it { should have_many(:flights).through :tickets }
-    it { should have_many(:airlines).through :flights }
-  end
-
-  describe 'scopes' do
+RSpec.describe 'airline show' do
+  describe 'airline show page' do
     let!(:airline) { Airline.create(name: 'Hello') }
     let!(:airline2) { Airline.create(name: 'World') }
     let!(:flight1) { create :flight, { airline_id: airline.id } }
@@ -25,8 +19,17 @@ RSpec.describe Passenger, type: :model do
     let!(:tick5) { Ticket.create(passenger_id: pass5.id, flight_id: flight2.id) }
     let!(:tick6) { Ticket.create(passenger_id: pass1.id, flight_id: flight2.id) }
 
-    it 'has the adults' do
-      expect(Passenger.adults).to eq([pass1, pass2, pass5, pass3])
+    before :each do
+      visit airline_path(airline)
+    end
+
+    it 'has the airlines passengers' do
+      expect(page).to have_content(pass1.name, count: 1)
+      expect(page).to have_content(pass3.name)
+      expect(page).to have_content(pass5.name)
+
+      expect(page).not_to have_content(pass2.name)
+      expect(page).not_to have_content(pass4.name)
     end
   end
 end

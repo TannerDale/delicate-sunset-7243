@@ -5,8 +5,7 @@ class Airline < ApplicationRecord
 
   def adult_passengers
     passengers
+      .ordered_by_flight_count
       .adults
-      .merge(Passenger.ordered_by_flight_count)
-      .distinct
   end
 end

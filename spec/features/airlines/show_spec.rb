@@ -34,7 +34,10 @@ RSpec.describe 'airline show' do
     end
 
     it 'has the airlines passengers ordered by flight count' do
+      save_and_open_page
       expect(page).to have_content(pass1.name, count: 1)
+      expect(page).to have_content(pass3.name, count: 1)
+      expect(page).to have_content(pass5.name, count: 1)
 
       expect(pass1.name).to appear_before(pass3.name, only_text: true)
       expect(pass3.name).to appear_before(pass5.name, only_text: true)
